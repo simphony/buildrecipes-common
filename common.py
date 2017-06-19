@@ -16,6 +16,7 @@ def edmenv_setup():
     if not os.path.exists(os.path.join(workspace(), "edm-root")):
         subprocess.check_call(["edm", "-r", os.path.join(workspace, "edm-root"),
             "environments", "create", "edmenv"])
+        edmenv_run("pip install hatcher")
 
 
 def edmenv_run(command_line):
@@ -26,12 +27,18 @@ def edmenv_run(command_line):
         "run", "--environment", "edmenv"]+command_line.split())
 
 
+
 def run(command_line):
     """Convenience method. Executes the command line. Equivalent to
     subprocess.check_call, but splits the string.
 
     Note: will not work with filenames containing spaces."""
     return subprocess.check_call(command_line.split())
+
+
+def upload_egg(filename):
+    """Uploads an egg file using hatcher"""
+    common.edmenv_run("hatcher eggs upload enthought simphony-dev rh5-x86_64 "+filename)
 
 
 def cd(path):
