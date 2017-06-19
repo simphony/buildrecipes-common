@@ -1,3 +1,4 @@
+import contextlib
 import os
 import subprocess
 
@@ -31,3 +32,13 @@ def run(command_line):
 
     Note: will not work with filenames containing spaces."""
     return subprocess.check_call(command_line.split())
+
+
+def cd(path):
+    """A context manager which changes the working directory to the given
+       path, and then changes it back to its previous value on exit.
+    """
+    cur = os.getcwd()
+    os.chdir(path)
+    yield
+    os.chdir(cur)
