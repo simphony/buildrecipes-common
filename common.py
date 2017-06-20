@@ -62,6 +62,7 @@ def clean(entities):
     """
 
     for entity in entities:
+        print("Removing {}".format(entity))
         try:
             if os.path.isdir(entity):
                 shutil.rmtree(entity)
