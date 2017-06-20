@@ -14,7 +14,8 @@ def workspace():
     if ws is None:
         if len(_workspace) == 0:
             _workspace.append(tempfile.mkdtemp(prefix="workspace-"))
-        return _workspace[0]
+        ws = _workspace[0]
+    return ws
 
 
 def edmenv_setup():
