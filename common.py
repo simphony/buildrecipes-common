@@ -54,7 +54,7 @@ def cd(path):
         os.chdir(cur)
 
 
-def clear(entities):
+def clean(entities):
     """Removes the specified entities. If dir, will remove the dir
     recursively. If file, will remove the files.
     entities must be a list.
