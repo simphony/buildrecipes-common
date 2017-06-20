@@ -1,6 +1,7 @@
 import contextlib
 import os
 import subprocess
+import shutil
 
 
 def workspace():
