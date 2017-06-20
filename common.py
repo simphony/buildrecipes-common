@@ -49,3 +49,19 @@ def cd(path):
     os.chdir(path)
     yield
     os.chdir(cur)
+
+
+def clear(entities):
+    """Removes the specified entities. If dir, will remove the dir
+    recursively. If file, will remove the files.
+    entities must be a list.
+    """
+
+    for entity in entities:
+        try:
+            if os.path.isdir(entity):
+                shutil.rmtree(entity)
+            elif os.path.isfile(entity):
+                os.unlink(entity)
+        except Exception as e:
+            print("Could not delete {}. {}".format(entity, e))
