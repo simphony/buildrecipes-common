@@ -2,13 +2,19 @@ import contextlib
 import os
 import subprocess
 import shutil
+import tempfile
 
+_workspace = []
 
 def workspace():
     """Returns the workspace as defined by jenkins, or a convenient directory
     if we are not running under jenkins"""
     # This is the jenkins workspace, or if not running on jenkins, a local dir.
-    return os.getenv("WORKSPACE", os.path.join(os.getenv("HOME"), "workspace"))
+    ws = os.getenv("WORKSPACE")
+    if ws is None:
+        if len(_workspace) == 0:
+            _workspace.append(tempfile.mkdtemp(prefix="workspace-"))
+        return _workspace[0]
 
 
 def edmenv_setup():
