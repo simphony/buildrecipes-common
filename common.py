@@ -41,6 +41,7 @@ def upload_egg(filename):
     common.edmenv_run("hatcher eggs upload enthought simphony-dev rh5-x86_64 "+filename)
 
 
+@contextlib.contextmanager
 def cd(path):
     """A context manager which changes the working directory to the given
        path, and then changes it back to its previous value on exit.
