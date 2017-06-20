@@ -38,7 +38,7 @@ def run(command_line):
 
 def upload_egg(filename):
     """Uploads an egg file using hatcher"""
-    common.edmenv_run("hatcher eggs upload enthought simphony-dev rh5-x86_64 "+filename)
+    edmenv_run("hatcher eggs upload enthought simphony-dev rh5-x86_64 "+filename)
 
 
 @contextlib.contextmanager
