@@ -14,7 +14,7 @@ def edmenv_setup():
     """Sets up an edm environment in the workspace.
     Must be called before using edmenv_run"""
     if not os.path.exists(os.path.join(workspace(), "edm-root")):
-        subprocess.check_call(["edm", "-r", os.path.join(workspace, "edm-root"),
+        subprocess.check_call(["edm", "-r", os.path.join(workspace(), "edm-root"),
             "environments", "create", "edmenv"])
         edmenv_run("pip install hatcher")
 
@@ -41,14 +41,17 @@ def upload_egg(filename):
     common.edmenv_run("hatcher eggs upload enthought simphony-dev rh5-x86_64 "+filename)
 
 
+@contextlib.contextmanager
 def cd(path):
     """A context manager which changes the working directory to the given
        path, and then changes it back to its previous value on exit.
     """
     cur = os.getcwd()
     os.chdir(path)
-    yield
-    os.chdir(cur)
+    try:
+        yield
+    finally:
+        os.chdir(cur)
 
 
 def clear(entities):
