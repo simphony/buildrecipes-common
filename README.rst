@@ -6,5 +6,5 @@ build and upload the eggs of simphony/force to the edm repository. They are mean
 simphony-framework.
 
 
-For documentation see [docs/index.rst]
+For documentation see `docs/index.rst`_
 
