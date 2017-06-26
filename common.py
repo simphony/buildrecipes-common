@@ -62,6 +62,24 @@ def cd(path):
         os.chdir(cur)
 
 
+def repo_to_edm_egg(repo_url, clone_dir, name, version, build):
+    """Shortcut that can be used for trivially python repositories.
+    Goes from the repo to the final uploadable egg, provided that the
+    repo contains a simple 'python setup.py install' package."""
+    if not os.path.exists(clone_dir):
+        run("git clone --branch "+version+" "+repo_url+" "+clone_dir)
+
+    with cd(clone_dir):
+        edmenv_run("python setup.py bdist_egg")
+
+    shutil.copy(
+        os.path.join(clone_dir, "dist", "{name}-{version}-py2.7.egg".format(
+        name=name, version=version)),
+        "dist")
+    run("edm repack-egg -b {build} dist/{name}-{version}-py2.7.egg".format(
+        name=name, version=version, build=build))
+
+
 def clean(entities):
     """Removes the specified entities. If dir, will remove the dir
     recursively. If file, will remove the files.
