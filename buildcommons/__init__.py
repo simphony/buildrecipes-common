@@ -98,7 +98,7 @@ def local_repo_to_edm_egg(repo_path, name, version, build):
         name=name, version=version, build=build))
 
     return "edmdist/{name}-{version}-{build}.egg".format(
-        name=name, version=version, build=build))
+        name=name, version=version, build=build)
 
 
 def clean(entities):
