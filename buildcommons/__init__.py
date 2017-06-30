@@ -21,7 +21,12 @@ def workspace():
 def edmenv_setup():
     """Sets up an edm environment in the workspace.
     Must be called before using edmenv_run"""
-    if not os.path.exists(os.path.join(workspace(), "edm-root")):
+    edm_root = os.path.join(workspace(), "edm-root")
+    if not os.path.exists(edm_root):
+        try:
+            os.makedirs(edm_root)
+        except OSError:
+            pass
         subprocess.check_call(["edm", "-r", os.path.join(workspace(), "edm-root"),
             "environments", "create", "edmenv"])
         edmenv_run("pip install hatcher")
