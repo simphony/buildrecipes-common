@@ -93,7 +93,7 @@ def local_repo_to_edm_egg(repo_path, name, version, build):
         edmenv_run("python setup.py bdist_egg")
 
     try:
-        os.makedirs("edmdist")
+        os.makedirs("endist")
     except OSError:
         pass
 
@@ -105,10 +105,10 @@ def local_repo_to_edm_egg(repo_path, name, version, build):
 
     shutil.move(
         os.path.join(repo_path, "dist", edm_egg_filename),
-        os.path.join("edmdist", edm_egg_filename)
+        os.path.join("endist", edm_egg_filename)
         )
 
-    return os.path.join("edmdist", edm_egg_filename)
+    return os.path.join("endist", edm_egg_filename)
 
 
 def clean(entities):
