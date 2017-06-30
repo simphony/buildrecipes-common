@@ -35,7 +35,6 @@ def edmenv_run(command_line):
         "run", "--environment", "edmenv"]+command_line.split())
 
 
-
 def run(command_line):
     """Convenience method. Executes the command line. Equivalent to
     subprocess.check_call, but splits the string.
@@ -62,7 +61,7 @@ def cd(path):
         os.chdir(cur)
 
 
-def repo_to_edm_egg(repo_url, clone_dir, name, version, build):
+def remote_repo_to_edm_egg(repo_url, clone_dir, name, version, build):
     """Deprecated. use remote_repo_to_edm_egg
 
     Shortcut that can be used for trivially python repositories.
@@ -76,8 +75,6 @@ def repo_to_edm_egg(repo_url, clone_dir, name, version, build):
 
     return local_repo_to_edm_egg(clone_dir, name, version, build)
 
-remote_repo_to_edm_egg = repo_to_edm_egg
-
 
 def local_repo_to_edm_egg(repo_path, name, version, build):
     """Shortcut that can be used for trivially python repositories.
@@ -90,15 +87,23 @@ def local_repo_to_edm_egg(repo_path, name, version, build):
     with cd(repo_path):
         edmenv_run("python setup.py bdist_egg")
 
-    shutil.copy(
-        os.path.join(repo_path, "dist", "{name}-{version}-py2.7.egg".format(
-        name=name, version=version)),
-        "edmdist")
-    run("edm repack-egg -b {build} edmdist/{name}-{version}-py2.7.egg".format(
+    try:
+        os.makedirs("edmdist")
+    except OSError:
+        pass
+
+    run("edm repack-egg -b {build} dist/{name}-{version}-py2.7.egg".format(
         name=name, version=version, build=build))
 
-    return "edmdist/{name}-{version}-{build}.egg".format(
+    edm_egg_filename = "{name}-{version}-{build}.egg".format(
         name=name, version=version, build=build)
+
+    shutil.move(
+        os.path.join(repo_path, "dist", edm_egg_filename),
+        os.path.join("edmdist", edm_egg_filename)
+        )
+
+    return os.path.join("edmdist", edm_egg_filename)
 
 
 def clean(entities):
