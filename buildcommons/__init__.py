@@ -6,15 +6,21 @@ import tempfile
 
 _workspace = []
 
-def workspace():
+def workspace(root_path):
     """Returns the workspace as defined by jenkins, or a convenient directory
     if we are not running under jenkins"""
     # This is the jenkins workspace, or if not running on jenkins, a local dir.
     ws = os.getenv("WORKSPACE")
     if ws is None:
         if len(_workspace) == 0:
-            _workspace.append(os.path.join(os.getcwd(), ".devenv"))
+            _workspace.append(os.path.join(os.path.abspath(root_path), "workspace"))
         ws = _workspace[0]
+
+    try:
+        os.makedirs(ws)
+    except OSError:
+        pass
+
     return ws
 
 
