@@ -1,0 +1,4 @@
+packages = [
+  # A list of strings in the format 
+  # "dependency_name dependency_version_at_patchlevel_detail"
+]
