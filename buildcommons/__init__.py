@@ -13,7 +13,7 @@ def workspace():
     ws = os.getenv("WORKSPACE")
     if ws is None:
         if len(_workspace) == 0:
-            _workspace.append(".devenv")
+            _workspace.append(tempfile.mkdtemp(prefix="workspace-"))
         ws = _workspace[0]
     return ws
 
