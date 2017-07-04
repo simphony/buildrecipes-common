@@ -28,9 +28,9 @@ With EDM installed, you will have to perform the following steps:
 
 - Request an API token to Enthought to access our deployment server. The token will be a random sequence 
   of characters that will be used by EDM server to authenticate your request.
-- Issue the following command::
+- Issue the following command (note: use rh5 even if you are on redhat 6)::
 
-    $ edm environments create simphony 
+    $ edm environments create --platform rh5-x86_64 simphony 
 
   This will download and install a python deployment and create a virtual environment called simphony.
 - edit the file ``$HOME/.edm.yaml``. Under the key repositories, add the entry::
@@ -66,5 +66,4 @@ With EDM installed, you will have to perform the following steps:
     $ python
     >>> import simphony
     >>>
-
 
