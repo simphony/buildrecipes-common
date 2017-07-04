@@ -2,3 +2,11 @@ packages = [
   # A list of strings in the format 
   # "dependency_name dependency_version_at_patchlevel_detail"
 ]
+add_files=[
+  # Files to add to the EDM package, in the following form: a tuple containing three strings.
+  # first element: the directory from which to take the files
+  # second element: the regexp of the files to take
+  # third element: the destination path in the egg file. 
+  # Note that there's some magic involved. if directory is EGG-INFO/bin or EGG-INFO/usr/bin
+  # the content will go to python exec_prefix.
+]

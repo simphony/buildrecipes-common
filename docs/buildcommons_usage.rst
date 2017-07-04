@@ -5,7 +5,7 @@ Buildcommons provides convenience routines to create the EDM egg. In the followi
 distribution has a traditional ``python setup.py install`` approach to deployment.
 
 1. copy the files under ``templates`` to the root of your distribution directory. 
-   There are three files
+   There are these files:
 
     - edmsetup.py: similar to a setup, but packages the egg. It provides the command ``egg`` to build the EDM egg,
       and ``upload_egg`` to send the egg to the EDM server. You cannot perform this last operation unless you have
@@ -17,6 +17,8 @@ distribution has a traditional ``python setup.py install`` approach to deploymen
     - packageinfo.py: contains python vars for NAME, VERSION and BUILD. The first two are self-explanatory and should
       be reused in your setup.py for deduplication. The third is the egg build number. It is incremented when you want
       to upload the same version a second time (for example, you noticed you specified incorrect dependencies).
+
+    - edmenv.sh: contains shell environment setup that must be executed for the egg building to succeed.
 
 2. (if needed) modify the above files to your specific needs. This varies from distribution to distribution.
    
