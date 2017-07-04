@@ -7,6 +7,6 @@ add_files=[
   # first element: the directory from which to take the files
   # second element: the regexp of the files to take
   # third element: the destination path in the egg file. 
-  # Note that there's some magic involved. if directory is EGG-INFO/bin or EGG-INFO/usr/bin
-  # the content will go to python exec_prefix.
+  # Note that there's some magic involved. if directory is EGG-INFO/bin or EGG-INFO/usr/bin,
+  # EGG-INFO/lib or EGG-INFO/usr/lib the content will go to python exec_prefix.
 ]
